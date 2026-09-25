@@ -7,7 +7,7 @@
 :root{
   --ink:#f6f4ee; --ink-2:#fdfcf8; --ink-3:#efece2; --ink-4:#e5e1d3;
   --line:#dcd7c9; --line-2:#cbc5b4;
-  --mute:#6e6a5e; --mute-2:#8a8578;
+  --mute:#6e6a5e; --mute-2:#6e6a5e; /* fleet QA 2026-09-25: mute-2 raised from #8a8578 for 4.5:1 on paper (WCAG AA body text) */
   --text:#3d3b33; --text-hi:#14130f;
   --paper:#14130f; --paper-ink:#f6f4ee;
   --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;
@@ -41,7 +41,7 @@ nav.site .brand img{display:block;}
 .cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:2rem;}
 .btn{font:700 .8125rem/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:14px 20px;border:1px solid var(--line);display:inline-flex;gap:.6em;align-items:center;transition:background .15s,border-color .15s,color .15s;}
 .btn-primary{background:var(--paper);color:var(--paper-ink);border-color:var(--paper);}
-.btn-primary:hover{background:#fff;}
+.btn-primary:hover{background:#fff;color:var(--text-hi);} /* fleet QA 2026-09-25: keep dark ink when the hover bg goes light */
 .btn-ghost{background:transparent;color:var(--text-hi);}
 .btn-ghost:hover{border-color:var(--paper);}
 section{padding:var(--pad-section) 0;border-bottom:1px solid var(--line);}
@@ -49,13 +49,13 @@ section{padding:var(--pad-section) 0;border-bottom:1px solid var(--line);}
 .shead .label{display:block;margin-bottom:.6rem;}
 .shead h2{font-size:clamp(1.4rem,3vw,2rem);}
 .lead{max-width:70ch;color:var(--text);}
-.grid{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);}
+.grid{display:grid;gap:1px;} /* fleet QA 2026-09-25: grid no longer paints var(--line) or an outer border, so partial last rows show page ground instead of tan placeholder blocks */
 .g3{grid-template-columns:repeat(3,1fr);}
 .g2{grid-template-columns:repeat(2,1fr);}
-.cell{background:var(--ink-2);padding:24px;}
+.cell{background:var(--ink-2);padding:24px;box-shadow:0 0 0 1px var(--line);} /* fleet QA 2026-09-25: cells carry their own hairline frame */
 .cell h3{font-size:.95rem;margin-bottom:.5rem;}
 .cell p{font-size:.9375rem;color:var(--mute-2);}
-.num{font:700 3rem/1 var(--mono);color:var(--line-2);display:block;margin-bottom:.5rem;}
+.num{font:700 3rem/1 var(--mono);color:var(--mute);display:block;margin-bottom:.5rem;} /* fleet QA 2026-09-25: numerals lifted from line-2 watermark to ~4.9:1 on paper */
 .cell code{font:400 .8125rem var(--mono);color:var(--text);}
 .sheet{background:var(--ink-2);border:1px solid var(--line);padding:24px;overflow:auto;}
 .sheet pre{font:400 .875rem/1.7 var(--mono);color:var(--text);white-space:pre;}
